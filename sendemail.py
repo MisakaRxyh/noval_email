@@ -7,12 +7,12 @@ from email.header import Header
 import datetime
 import getnoval
 
-smtpserver = 'smtp.office365.com,587'
-username = '18956901938@163.com'
-password = 'czj123456'
-sender = '18956901938@163.com'
-receiver = '18956901938@163.com'
-#receiver = ['18956901938@163.com','2998280865@qq.com']
+smtpserver = 'smtp.163.com'
+username = '123456789@163.com'
+password = '******'
+sender = '123456789@163.com'
+receiver = '123456789@163.com'
+#receiver = ['123456789@163.com','123456789@163.com']
 urls = []
 nexturls = []
 htmls = []
@@ -34,17 +34,21 @@ with open('E:/Python_Test/noval_email/noval.txt', 'w') as f:
         f.write(nexturl + '\n')
 
 smtp = smtplib.SMTP()
-smtp.connect('smtp.163.com')
+smtp.connect()
 print("connect success")
 smtp.set_debuglevel(1)
+# 使用SSH方式访问 在Linux系统中使用
+# smtp = smtplib.SMTP_SSL(smtpserver,465)
+# smtp.helo()
+# smtp.ehlo()
 smtp.login(username,password)
 print("login success")
 for (subject,html) in zip(subjects,htmls):
     subject = Header(subject, 'utf-8').encode()
     msg = MIMEMultipart('mixd')
     msg['Subject'] = subject
-    msg['From'] = '皮皮陈<18956901938@163.com>'
-    msg['To'] = '渣渣陈<18956901938@163.com>'
+    msg['From'] = '皮皮陈<123456789@163.com>'
+    msg['To'] = '渣渣陈<123456789@163.com>'
     msg['Data'] = datetime.datetime.now().strftime('%Y-%m-%d')
 
     text_html = MIMEText(html,'html','utf-8')
